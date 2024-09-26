@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const navigate = useNavigate();
   const loginFetch = async () => {
     try {
       const resp = await fetch("http://localhost:3001/auth/login", {
@@ -16,6 +17,7 @@ function LoginPage() {
         const result = await resp.json();
         // console.log(result.accessToken);
         localStorage.setItem("token", result.accessToken);
+        navigate("/clients");
       }
     } catch (error) {
       console.log(error);

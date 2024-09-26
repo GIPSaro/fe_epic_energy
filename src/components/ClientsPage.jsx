@@ -3,18 +3,20 @@ import { Container } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 
 const ClientsPage = () => {
-  const [clients, setClients] = useState(null);
+  const [clients, setClients] = useState([]);
 
   const fetchClients = async () => {
     try {
       const resp = await fetch("http://localhost:3001/clients", {
         headers: {
-          Authorizzation: "Bearer " + localStorage.getItem("token"),
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
       });
       if (resp.ok) {
         const result = await resp.json();
-        setClients(result);
+        console.log(result.content);
+
+        setClients(result.content);
       } else {
         throw new Error("Errrore nel recupero dei dati!");
       }
@@ -29,33 +31,43 @@ const ClientsPage = () => {
 
   return (
     <Container className="mt-5">
+      <h1>Clients</h1>
       <Table striped bordered hover>
         <thead>
           <tr>
             <th>#</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Username</th>
+            <th>Company Name</th>
+            <th>Company Type</th>
+            <th>VAT</th>
+            <th>Email</th>
+            <th>Insert date</th>
+            <th>Tel. NUmber</th>
+            <th>Annual Turnover</th>
+            <th>Pec</th>
+            <th>Work address</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td colSpan={2}>Larry the Bird</td>
-            <td>@twitter</td>
-          </tr>
+          {clients.map((client, index) => {
+            return (
+              <tr key={client.id}>
+                <td>{index + 1}</td>
+                <td>{client.companyName}</td>
+                <td>{client.company.name}</td>
+                <td>{client.vat}</td>
+                <td>{client.email}</td>
+                <td>{client.insertDate}</td>
+                <td>{client.telNumber}</td>
+                <td>{client.annualTurnover}</td>
+                <td>{client.pec}</td>
+                <td>
+                  <p>
+                    {client.workAddress.street}, {client.workAddress.streetNumber}, {client.workAddress.zipNumber}, {client.workAddress.city.name}, {client.workAddress.city.province.initial}
+                  </p>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </Table>
     </Container>
