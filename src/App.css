@@ -1,15 +1,14 @@
-
-.registration-page {
-  background-image: url('https://images.unsplash.com/photo-1529704193007-e8c78f0f46f9?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3Dhttps://images.unsplash.com/photo-1470137237906-d8a4f71e1966?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjR8fGVuZXJneSUyMGFnZW5jeXxlbnwwfHwwfHx8MA%3D%3'); /* URL dell'immagine */
+.registration-page, .loginPage {
+  background-image: url('https://images.unsplash.com/photo-1529704193007-e8c78f0f46f9?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
   background-size: cover;
   background-position: center;
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  
 }
-.form-container {
+
+.form-container, .form-container2 {
   background-color: rgba(255, 255, 255, 0.7); 
   padding: 30px;
   border-radius: 8px; 
