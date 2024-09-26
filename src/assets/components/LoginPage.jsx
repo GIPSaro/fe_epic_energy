@@ -9,7 +9,7 @@ function LoginPage() {
     e.preventDefault();
    
     if (email && password) {
-      console.log('Login attempted with:', { email, password });
+      console.log('Login avvenuto come: ', { email, password });
       alert('Login avvenuto con successo!'); 
       setEmail('');
       setPassword('');
@@ -17,12 +17,13 @@ function LoginPage() {
   };
 
   return (
-    <Container  fluid
-    className="d-flex align-items-center justify-content-center"
+  <div className='loginPage'>
+    <Container className="d-flex align-items-center justify-content-center"
     style={{ minHeight: '100vh' }} >
-      <Row className="justify-content-center mt-5" style={{ width: "300px" }}>
+      <Row className="justify-content-center mt-5" >
         <Col md={12}>
-          <h2 className="text-center mb-4">Login</h2>
+        <div className="form-container2">
+          <h2 className="text-center mb-2">Login</h2>
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
@@ -50,9 +51,11 @@ function LoginPage() {
               Login
             </Button>
           </Form>
+          </div>
         </Col>
       </Row>
     </Container>
+    </div>
   );
 }
 
