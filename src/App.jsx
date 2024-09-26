@@ -1,14 +1,19 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import LoginPage from "./assets/components/LoginPage";
-import RegistrationPage from "./assets/components/RegistrationPage";
+import RegistrationPage from "./components/RegistrationPage";
+import ClientsPage from "./components/ClientsPage";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import LoginPage from "./components/LoginPage";
 
 function App() {
   return (
-    <>
-      <LoginPage></LoginPage>
-      {/* <RegistrationPage/> */}
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/clients" element={<ClientsPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/registration" element={<RegistrationPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
