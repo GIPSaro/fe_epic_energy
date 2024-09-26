@@ -93,14 +93,7 @@ function RegistrationPage() {
               />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicAvatar">
-              <Form.Label>Avatar (opzionale)</Form.Label>
-              <Form.Control
-                type="file"
-                onChange={handleFileChange}
-                accept="image/*"
-              />
-            </Form.Group>
+          
 
             <Button variant="primary" type="submit" className="w-100">
               Register
