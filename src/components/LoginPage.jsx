@@ -6,9 +6,10 @@ function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const url = import.meta.env.VITE_URL;
   const loginFetch = async () => {
     try {
-      const resp = await fetch("http://localhost:3001/auth/login", {
+      const resp = await fetch(url + "/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: email, password: password }),

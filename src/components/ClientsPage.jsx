@@ -4,10 +4,11 @@ import Table from "react-bootstrap/Table";
 
 const ClientsPage = () => {
   const [clients, setClients] = useState([]);
+  const url = import.meta.env.VITE_URL;
 
   const fetchClients = async () => {
     try {
-      const resp = await fetch("http://localhost:3001/clients", {
+      const resp = await fetch(url + "/clients", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
@@ -27,6 +28,7 @@ const ClientsPage = () => {
 
   useEffect(() => {
     fetchClients();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
