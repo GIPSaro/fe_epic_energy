@@ -1,72 +1,19 @@
-/* #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-} */
-
-/* .login-wrapper {
+.registration-page {
+  background-image: url('https://images.unsplash.com/photo-1529704193007-e8c78f0f46f9?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3Dhttps://images.unsplash.com/photo-1470137237906-d8a4f71e1966?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjR8fGVuZXJneSUyMGFnZW5jeXxlbnwwfHwwfHx8MA%3D%3'); /* URL dell'immagine */
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  padding: 20px;
+  
 }
-
-.login-form-container {
-  width: 100%;
-  max-width: 400px;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  background-color: #fff;
+.form-container {
+  background-color: rgba(255, 255, 255, 0.7); 
+  padding: 30px;
+  border-radius: 8px; 
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); 
+  max-width: 600px;
+  width: 100%; 
 }
-
-.login-title {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.login-form {
-  margin-bottom: 15px;
-}
-
-.login-button {
-  width: 100%;
-} */
