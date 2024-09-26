@@ -1,29 +1,48 @@
 import { useState } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 function RegistrationPage() {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
-  const [surname, setSurname] = useState('');
-  const [avatar, setAvatar] = useState('');
+  const [userData, setUserData] = useState({
+    username: "",
+    email: "",
+    password: "", 
+    name: "",
+    surname: ""
+  })
+
+  // const navigate = useNavigate()
+  const url = "http://localhost:8080/auth/register"
+
+  const register = async () =>{
+    try{
+      const resp = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        }, 
+        body: JSON.stringify(userData),
+    });
+      if(resp.ok){
+        // navigate("/login")
+      }
+    }catch (error){
+      console.log(error);
+      
+    }
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-   
-    if (username && email && password && name && surname) {
-      console.log('Registrazione avvenuta come:', { username, email, password, name, surname, avatar });
-      alert('Registrazione avvenuta con successo!');
-      setUsername('');
-      setEmail('');
-      setPassword('');
-      setName('');
-      setSurname('');
-      setAvatar('');
-      e.target.reset(); 
+    register()
     }
      
+<<<<<<< Updated upstream
+=======
+
+  const handleChange = (e) => {
+    setUserData({...userData, [e.target.name]: e.target.value})
+>>>>>>> Stashed changes
   };
 
   return (
@@ -40,8 +59,9 @@ function RegistrationPage() {
               <Form.Control
                 type="text"
                 placeholder="Enter username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                name="username"
+                value={userData.username}
+                onChange={handleChange}
                 required 
               />
             </Form.Group>
@@ -51,8 +71,9 @@ function RegistrationPage() {
               <Form.Control
                 type="email"
                 placeholder="Enter email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                name="email"
+                value={userData.email}
+                onChange={handleChange}
                 required 
               />
             </Form.Group>
@@ -62,8 +83,9 @@ function RegistrationPage() {
               <Form.Control
                 type="password"
                 placeholder="Enter password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                name="password"
+                value={userData.password}
+                onChange={handleChange}
                 required 
               />
             </Form.Group>
@@ -73,8 +95,9 @@ function RegistrationPage() {
               <Form.Control
                 type="text"
                 placeholder="Enter name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                name="name"
+                value={userData.name}
+                onChange={handleChange}
                 required 
               />
             </Form.Group>
@@ -84,8 +107,9 @@ function RegistrationPage() {
               <Form.Control
                 type="text"
                 placeholder="Enter surname"
-                value={surname}
-                onChange={(e) => setSurname(e.target.value)}
+                name="surname"
+                value={userData.surname}
+                onChange={handleChange}
                 required 
               />
             </Form.Group>
