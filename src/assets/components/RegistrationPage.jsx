@@ -25,9 +25,6 @@ function RegistrationPage() {
     }
      
   };
-  const handleFileChange = (e) => {
-    setAvatar(e.target.files[0]);
-  };
 
   return (
     <div className="registration-page"> 
