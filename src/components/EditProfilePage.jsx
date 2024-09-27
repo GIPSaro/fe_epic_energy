@@ -49,20 +49,17 @@ const EditProfilePage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const formData = new FormData();
-      formData.append("name", user.name);
-      formData.append("surname", user.surname);
-      formData.append("email", user.email);
-      if (newAvatar) {
-        formData.append("avatar", newAvatar);
-      }
-
-      const resp = await fetch(url + "/users", {
+      const resp = await fetch(url + "/users/me", {
         method: "PUT",
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
+          "Content-Type": "application/json",
         },
-        body: formData,
+        body: JSON.stringify({
+          name: user.name,
+          surname: user.surname,
+          email: user.email,
+        }),
       });
 
       if (resp.ok) {
@@ -75,6 +72,38 @@ const EditProfilePage = () => {
       console.log(error);
     }
   };
+  const handleAvatarSubmit = async () => {
+    if (!newAvatar) return;
+
+    try {
+      const formData = new FormData();
+      formData.append("avatar", newAvatar);
+
+      const resp = await fetch(url + "/users/avatar", {
+        method: "PUT",
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+        body: formData,
+      });
+
+      if (resp.ok) {
+        const result = await resp.json();
+        console.log("Avatar aggiornato:", result);
+        setUser({ ...user, avatar: result.avatar });
+      } else {
+        throw new Error("Errore nell'aggiornamento dell'avatar!");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleFullSubmit = async (e) => {
+    e.preventDefault();
+    await handleSubmit(e); 
+    await handleAvatarSubmit(); 
+  };
 
   return (
     <Container className="mt-5">
@@ -82,7 +111,7 @@ const EditProfilePage = () => {
         <Col md={6}>
           <Card className="p-4">
             <h3 className="text-center mb-4">Modifica Profilo</h3>
-            <Form onSubmit={handleSubmit}>
+            <Form  onSubmit={handleFullSubmit}>
               <Form.Group className="mb-3" controlId="formName">
                 <Form.Label>Nome</Form.Label>
                 <Form.Control type="text" name="name" value={user.name} onChange={handleInputChange} />
