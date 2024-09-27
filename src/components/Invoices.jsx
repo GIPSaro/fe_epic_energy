@@ -53,6 +53,10 @@ const Invoices = () => {
     filterByClient()
   }
 
+  useEffect(() => {
+    getallInvoices()
+  }, [])
+
 
   return (
     <>
