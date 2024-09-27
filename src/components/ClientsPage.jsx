@@ -34,7 +34,7 @@ const ClientsPage = () => {
 
   return (
     <>
-    {/* <SideNavbar/> */}
+    <SideNavbar/>
     <Container className="mt-5">
       <h1>Clients</h1>
       <Table striped bordered hover>

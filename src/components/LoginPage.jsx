@@ -1,12 +1,21 @@
 import { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer, Slide } from "react-toastify";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const url = import.meta.env.VITE_URL;
+
+const notifyError = (errorMsg) =>{
+  toast.error(errorMsg, {
+    className: "text-white bg-danger m-4",
+  })
+}
+
+
   const loginFetch = async () => {
     try {
       const resp = await fetch(url + "/auth/login", {
@@ -21,6 +30,7 @@ function LoginPage() {
         navigate("/clients");
       }
     } catch (error) {
+      notifyError(error.message)
       console.log(error);
     }
   };
@@ -32,7 +42,7 @@ function LoginPage() {
   };
 
   return (
-    <Container>
+    <Container className="mx-auto d-flex justify-content-center align-items-center">
       <Row className="justify-content-center mt-5" style={{ width: "300px" }}>
         <Col md={12}>
           <div className="form-container2">
@@ -51,6 +61,20 @@ function LoginPage() {
               <Button variant="primary" type="submit" className="w-100">
                 Login
               </Button>
+              <>
+              <ToastContainer
+                position="bottom-center"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                draggable
+                pauseOnHover
+                theme="dark"
+                transition={Slide}
+              />
+            </>
             </Form>
           </div>
         </Col>
