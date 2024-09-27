@@ -79,8 +79,8 @@ const EditProfilePage = () => {
       const formData = new FormData();
       formData.append("avatar", newAvatar);
 
-      const resp = await fetch(url + "/users/avatar", {
-        method: "PUT",
+      const resp = await fetch(url + "/users/me/avatar", {
+        method: "POST",
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
@@ -101,8 +101,9 @@ const EditProfilePage = () => {
 
   const handleFullSubmit = async (e) => {
     e.preventDefault();
-    await handleSubmit(e); 
-    await handleAvatarSubmit(); 
+    await handleSubmit(e);
+    await handleAvatarSubmit();
+    await fetchUser();
   };
 
   return (
@@ -111,7 +112,7 @@ const EditProfilePage = () => {
         <Col md={6}>
           <Card className="p-4">
             <h3 className="text-center mb-4">Modifica Profilo</h3>
-            <Form  onSubmit={handleFullSubmit}>
+            <Form onSubmit={handleFullSubmit}>
               <Form.Group className="mb-3" controlId="formName">
                 <Form.Label>Nome</Form.Label>
                 <Form.Control type="text" name="name" value={user.name} onChange={handleInputChange} />

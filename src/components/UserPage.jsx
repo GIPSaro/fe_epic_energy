@@ -67,7 +67,7 @@ const UserPage = () => {
           </Card>
         </Col>
         <Col xs={9} className="text-center d-flex flex-column justify-content-center">
-          <h1>BENVENUTO IN EPIC ENERGY SERVICES</h1>
+          <h1>WELCOME TO EPIC ENERGY SERVICES</h1>
           <p className="lead">Seleziona una delle opzioni qui sotto per procedere:</p>
           <div className="mt-4">
             <Button variant="success" className="me-3" onClick={() => navigate("/clients")} style={{ width: "200px" }}>

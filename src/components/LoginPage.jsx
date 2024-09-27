@@ -9,12 +9,11 @@ function LoginPage() {
   const navigate = useNavigate();
   const url = import.meta.env.VITE_URL;
 
-const notifyError = (errorMsg) =>{
-  toast.error(errorMsg, {
-    className: "text-white bg-danger m-4",
-  })
-}
-
+  const notifyError = (errorMsg) => {
+    toast.error(errorMsg, {
+      className: "text-white bg-danger m-4",
+    });
+  };
 
   const loginFetch = async () => {
     try {
@@ -27,10 +26,10 @@ const notifyError = (errorMsg) =>{
         const result = await resp.json();
         // console.log(result.accessToken);
         localStorage.setItem("token", result.accessToken);
-        navigate("/clients");
+        navigate("/user");
       }
     } catch (error) {
-      notifyError(error.message)
+      notifyError(error.message);
       console.log(error);
     }
   };
@@ -62,19 +61,8 @@ const notifyError = (errorMsg) =>{
                 Login
               </Button>
               <>
-              <ToastContainer
-                position="bottom-center"
-                autoClose={3000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                draggable
-                pauseOnHover
-                theme="dark"
-                transition={Slide}
-              />
-            </>
+                <ToastContainer position="bottom-center" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} draggable pauseOnHover theme="dark" transition={Slide} />
+              </>
             </Form>
           </div>
         </Col>

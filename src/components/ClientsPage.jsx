@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Container, Dropdown, DropdownButton, Form, Image } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
-// import SideNavbar from "./SideNavBar";
+import SideNavbar from "./SideNavBar";
 
 const ClientsPage = () => {
   const [clients, setClients] = useState([]);
@@ -111,100 +111,100 @@ const ClientsPage = () => {
 
   return (
     <>
-    <SideNavbar/>
-    <Container className="mt-5">
-      <h1>Clients</h1>
-      <DropdownButton className="mb-2" id="dropdown-basic-button" title="Filter">
-        <Dropdown.Item
-          onClick={() => {
-            setTurnoverToggle(true);
-            setContactDateToggle(false);
-            setClientsNameToggle(false);
-          }}
-        >
-          Annual turnover
-        </Dropdown.Item>
-        <Dropdown.Item
-          onClick={() => {
-            setTurnoverToggle(false);
-            setContactDateToggle(true);
-            setClientsNameToggle(false);
-          }}
-        >
-          Contact Date
-        </Dropdown.Item>
-        <Dropdown.Item
-          onClick={() => {
-            setTurnoverToggle(false);
-            setContactDateToggle(false);
-            setClientsNameToggle(true);
-          }}
-        >
-          Clients Name
-        </Dropdown.Item>
-      </DropdownButton>
-      <Form className={turnoverToggle ? "d-block" : "d-none"} onSubmit={handleSubmitTurnover}>
-        <Form.Group className="mb-3" controlId="formBasicUsername">
-          <Form.Label>Annual Turnover</Form.Label>
-          <Form.Control type="text" placeholder="Value" value={value} onChange={handleChange} />
-        </Form.Group>
-      </Form>
-      <Form className={contactDateToggle ? "d-block" : "d-none"} onSubmit={handleSubmitContactDate}>
-        <Form.Group className="mb-3" controlId="formBasicUsername">
-          <Form.Label>Contact Date</Form.Label>
-          <Form.Control type="text" placeholder="Value" value={value} onChange={handleChange} />
-        </Form.Group>
-      </Form>
-      <Form className={clientsNameToggle ? "d-block" : "d-none"} onSubmit={handleSubmitClientName}>
-        <Form.Group className="mb-3" controlId="formBasicUsername">
-          <Form.Label>Clients Name</Form.Label>
-          <Form.Control type="text" placeholder="Value" value={value} onChange={handleChange} />
-        </Form.Group>
-      </Form>
+      <SideNavbar />
+      <Container className="mt-5">
+        <h1>Clients</h1>
+        <DropdownButton className="mb-2" id="dropdown-basic-button" title="Filter">
+          <Dropdown.Item
+            onClick={() => {
+              setTurnoverToggle(true);
+              setContactDateToggle(false);
+              setClientsNameToggle(false);
+            }}
+          >
+            Annual turnover
+          </Dropdown.Item>
+          <Dropdown.Item
+            onClick={() => {
+              setTurnoverToggle(false);
+              setContactDateToggle(true);
+              setClientsNameToggle(false);
+            }}
+          >
+            Contact Date
+          </Dropdown.Item>
+          <Dropdown.Item
+            onClick={() => {
+              setTurnoverToggle(false);
+              setContactDateToggle(false);
+              setClientsNameToggle(true);
+            }}
+          >
+            Clients Name
+          </Dropdown.Item>
+        </DropdownButton>
+        <Form className={turnoverToggle ? "d-block" : "d-none"} onSubmit={handleSubmitTurnover}>
+          <Form.Group className="mb-3" controlId="formBasicUsername">
+            <Form.Label>Annual Turnover</Form.Label>
+            <Form.Control type="text" placeholder="Value" value={value} onChange={handleChange} />
+          </Form.Group>
+        </Form>
+        <Form className={contactDateToggle ? "d-block" : "d-none"} onSubmit={handleSubmitContactDate}>
+          <Form.Group className="mb-3" controlId="formBasicUsername">
+            <Form.Label>Contact Date</Form.Label>
+            <Form.Control type="text" placeholder="Value" value={value} onChange={handleChange} />
+          </Form.Group>
+        </Form>
+        <Form className={clientsNameToggle ? "d-block" : "d-none"} onSubmit={handleSubmitClientName}>
+          <Form.Group className="mb-3" controlId="formBasicUsername">
+            <Form.Label>Clients Name</Form.Label>
+            <Form.Control type="text" placeholder="Value" value={value} onChange={handleChange} />
+          </Form.Group>
+        </Form>
 
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Company Name</th>
-            <th>Company Logo</th>
-            <th>Company Type</th>
-            <th>VAT</th>
-            <th>Email</th>
-            <th>Last contact date</th>
-            <th>Tel. NUmber</th>
-            <th>Annual Turnover</th>
-            <th>Pec</th>
-            <th>Work address</th>
-          </tr>
-        </thead>
-        <tbody>
-          {clients.map((client, index) => {
-            return (
-              <tr key={client.id}>
-                <td>{index + 1}</td>
-                <td>{client.companyName}</td>
-                <td>
-                  <Image src={client.companyLogo} width={60} height={60} alt="logo" />
-                </td>
-                <td>{client.company.name}</td>
-                <td>{client.vat}</td>
-                <td>{client.email}</td>
-                <td>{client.lastContactDate}</td>
-                <td>{client.telNumber}</td>
-                <td>{client.annualTurnover}</td>
-                <td>{client.pec}</td>
-                <td>
-                  <p>
-                    {client.workAddress.street}, {client.workAddress.streetNumber}, {client.workAddress.zipNumber}, {client.workAddress.city.name}, {client.workAddress.city.province.initial}
-                  </p>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </Table>
-    </Container>
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Company Name</th>
+              <th>Company Logo</th>
+              <th>Company Type</th>
+              <th>VAT</th>
+              <th>Email</th>
+              <th>Last contact date</th>
+              <th>Tel. NUmber</th>
+              <th>Annual Turnover</th>
+              <th>Pec</th>
+              <th>Work address</th>
+            </tr>
+          </thead>
+          <tbody>
+            {clients.map((client, index) => {
+              return (
+                <tr key={client.id}>
+                  <td>{index + 1}</td>
+                  <td>{client.companyName}</td>
+                  <td>
+                    <Image src={client.companyLogo} width={60} height={60} alt="logo" />
+                  </td>
+                  <td>{client.company.name}</td>
+                  <td>{client.vat}</td>
+                  <td>{client.email}</td>
+                  <td>{client.lastContactDate}</td>
+                  <td>{client.telNumber}</td>
+                  <td>{client.annualTurnover}</td>
+                  <td>{client.pec}</td>
+                  <td>
+                    <p>
+                      {client.workAddress.street}, {client.workAddress.streetNumber}, {client.workAddress.zipNumber}, {client.workAddress.city.name}, {client.workAddress.city.province.initial}
+                    </p>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </Table>
+      </Container>
     </>
   );
 };
