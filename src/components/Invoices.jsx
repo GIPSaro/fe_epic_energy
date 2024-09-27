@@ -9,6 +9,8 @@ const Invoices = () => {
   const [showClient, setShowClient] = useState(false)
   const [showState, setShowState] = useState(false)
   const [showData, setShowData] = useState(false)
+  const [showYear, setShowYear] = useState(false)
+  const [showRangeAmount, setShowRangeAmount] = useState(false)
   const url = import.meta.env.VITE_URL;
 
 
@@ -17,6 +19,11 @@ const Invoices = () => {
       className: "text-white bg-danger m-4",
     })
   }
+
+  function formatDate(dateString) {
+    const [day, month, year] = dateString.split('/');
+    return `${year}-${month}-${day}`;
+}
 
   const getallInvoices = async () => {
     const resp = await fetch(url + "/invoices", {
@@ -45,13 +52,92 @@ const Invoices = () => {
     }
   }
 
+  const filterByState = async () => {
+    try {  const resp = await fetch(url + "/invoices?invoicesState=" + value, {
+          headers: {
+              Authorization: "Bearer " + localStorage.getItem("token"),
+          }, 
+      });
+      if(resp.ok){
+          const res = await resp.json()
+          setInvoices(res.content)
+      }} catch (error){
+          console.log(error);
+          notifyError("Errore nel reperimento dei dati")
+      }
+    }
+
+    const filterByDate = async () => {
+        try {  const resp = await fetch(url + "/invoices?date=" + value, {
+              headers: {
+                  Authorization: "Bearer " + localStorage.getItem("token"),
+              }, 
+          });
+          if(resp.ok){
+              const res = await resp.json()
+              setInvoices(res.content)
+          }} catch (error){
+              console.log(error);
+              notifyError("Errore nel reperimento dei dati")
+          }
+        }
+    const filterByYear = async () => {
+            try {  const resp = await fetch(url + "/invoices?year=" + value, {
+                  headers: {
+                      Authorization: "Bearer " + localStorage.getItem("token"),
+                  }, 
+              });
+              if(resp.ok){
+                  const res = await resp.json()
+                  setInvoices(res.content)
+              }} catch (error){
+                  console.log(error);
+                  notifyError("Errore nel reperimento dei dati")
+              }
+            }
+    const filterByRangeAmount = async () => {
+                try {  const resp = await fetch(url + "/invoices?amountRange=" + value, {
+                      headers: {
+                          Authorization: "Bearer " + localStorage.getItem("token"),
+                      }, 
+                  });
+                  if(resp.ok){
+                      const res = await resp.json()
+                      setInvoices(res.content)
+                  }} catch (error){
+                      console.log(error);
+                      notifyError("Errore nel reperimento dei dati")
+                  }
+                }
+
   const handleChange = e => {
     setValue(e.target.value)
   }
 
+  const handleChangeData = e => {
+    setValue(formatDate(e.target.value))
+  }
+
   const handlefetchByClient = e => {
     e.preventDefault()
+    filterByState()
+  }
+
+  const handlefetchByState = e => {
+    e.preventDefault()
     filterByClient()
+  }
+  const handlefetchByDate = e => {
+    e.preventDefault()
+    filterByDate()
+  }
+  const handlefetchByYear = e => {
+    e.preventDefault()
+    filterByYear()
+  }
+  const handlefetchByRangeAmount = e => {
+    e.preventDefault()
+    filterByRangeAmount()
   }
 
   useEffect(() => {
@@ -70,16 +156,35 @@ const Invoices = () => {
         <Dropdown.Item onClick={() => {
             setShowClient(true)
             setShowState(false);
-             setShowData(false)}}>Client</Dropdown.Item>
+             setShowData(false); 
+             setShowYear(false); 
+             setShowRangeAmount(false)}}>Client</Dropdown.Item>
         <Dropdown.Item onClick={() => {
             setShowClient(false);
              setShowState(true);
-             setShowData(false) }}>State</Dropdown.Item>
+             setShowData(false)
+             setShowYear(false); 
+             setShowRangeAmount(false) }}>State</Dropdown.Item>
         <Dropdown.Item onClick={() => {
             setShowState(false);
              setShowData(true)
-             setShowClient(false); }}>Date</Dropdown.Item>
+             setShowClient(false);
+             setShowYear(false); 
+             setShowRangeAmount(false) }}>Date</Dropdown.Item>
+              <Dropdown.Item onClick={() => {
+            setShowState(false);
+             setShowData(false)
+             setShowClient(false); 
+             setShowYear(true); 
+             setShowRangeAmount(false)}}>Year</Dropdown.Item>
+              <Dropdown.Item onClick={() => {
+            setShowState(false);
+             setShowData(false)
+             setShowClient(false); 
+             setShowYear(false); 
+             setShowRangeAmount(true)}}>Range Amount</Dropdown.Item>
       </DropdownButton>
+      
 
       <Form className={showClient ? "d-block" : "d-none"} onSubmit={handlefetchByClient}>
         <Form.Group className="mb-3" controlId="formBasicUsername">
@@ -87,16 +192,28 @@ const Invoices = () => {
           <Form.Control type="text" placeholder="Client" value={value} onChange={handleChange} />
         </Form.Group>
         </Form>
-        <Form className={showState ? "d-block" : "d-none"} onSubmit={handlefetchByClient}>
+        <Form className={showState ? "d-block" : "d-none"} onSubmit={handlefetchByState}>
         <Form.Group className="mb-3" controlId="formBasicUsername">
           <Form.Label>State</Form.Label>
           <Form.Control type="text" placeholder="State" value={value} onChange={handleChange} />
         </Form.Group>
         </Form>
-        <Form className={showData ? "d-block" : "d-none"} onSubmit={handlefetchByClient}>
+        <Form className={showData ? "d-block" : "d-none"} onSubmit={handlefetchByDate}>
         <Form.Group className="mb-3" controlId="formBasicUsername">
           <Form.Label>Date</Form.Label>
-          <Form.Control type="date" placeholder="Date" value={value} onChange={handleChange} />
+          <Form.Control type="date" placeholder="Date" value={value} onChange={handleChangeData} />
+        </Form.Group>
+      </Form>
+      <Form className={showYear ? "d-block" : "d-none"} onSubmit={handlefetchByYear}>
+        <Form.Group className="mb-3" controlId="formBasicUsername">
+          <Form.Label>Year</Form.Label>
+          <Form.Control type="text" placeholder="Year" value={value} onChange={handleChange} />
+        </Form.Group>
+      </Form>
+      <Form className={showRangeAmount ? "d-block" : "d-none"} onSubmit={handlefetchByRangeAmount}>
+        <Form.Group className="mb-3" controlId="formBasicUsername">
+          <Form.Label>Range Amount</Form.Label>
+          <Form.Control type="number" placeholder="Range Amount" value={value} onChange={handleChange} />
         </Form.Group>
       </Form>
         <Table striped bordered hover>
