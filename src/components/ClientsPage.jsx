@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
-import SideNavbar from "./SideNavBar";
+// import SideNavbar from "./SideNavBar";
 
 const ClientsPage = () => {
   const [clients, setClients] = useState([]);
