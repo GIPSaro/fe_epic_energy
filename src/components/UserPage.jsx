@@ -15,7 +15,7 @@ const UserPage = () => {
 
   const fetchUser = async () => {
     try {
-      const resp = await fetch(url + "/users", {
+      const resp = await fetch(url + "/users/me", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
@@ -23,7 +23,7 @@ const UserPage = () => {
 
       if (resp.ok) {
         const result = await resp.json();
-        setUser(result.content);
+        setUser(result);
       } else {
         throw new Error("Errore nel recupero dei dati!");
       }
@@ -56,9 +56,9 @@ const UserPage = () => {
             />
             <Card.Body>
               <Card.Title>
-                {user.name}NOME COGNOME {user.surname}
+                <span>{user.name}</span> <span>{user.surname}</span>
               </Card.Title>
-              <Card.Text>{user.email}EMAIL</Card.Text>
+              <Card.Text>{user.email}</Card.Text>
               <Button variant="primary" className="mt-3" onClick={() => navigate("/edit-profile")}>
                 {" "}
                 Modifica Profilo
