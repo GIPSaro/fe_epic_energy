@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { Navbar, Nav, Button } from 'react-bootstrap';
-import { List, MenuButton, XCircle } from 'react-bootstrap-icons';
-import { Link, useNavigate } from 'react-router-dom';
+import { List,  X } from 'react-bootstrap-icons';
+import { Link } from 'react-router-dom';
 
 function SideNavbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate()
+
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -24,9 +24,9 @@ function SideNavbar() {
       {/* Main content */}
       <div className="flex-grow-1">
         {/* Toggle Button */}
-        <Navbar bg="light" expand="lg" className="px-3">
-          <Button onClick={toggleSidebar} className="me-auto vertical-align-middle border-0">
-            {isOpen ? <XCircle/> : <List />}
+        <Navbar bg="white" expand="lg" className="px-3">
+          <Button onClick={toggleSidebar} className="me-auto vertical-align-middle bg-white text-black border-0">
+            {isOpen ? <X/> : <List />}
           </Button>
         </Navbar>
 

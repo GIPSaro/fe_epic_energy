@@ -25,7 +25,7 @@ const Invoices = () => {
       },
     });
     if (resp.ok) {
-      const res = await resp.json;
+      const res = await resp.json();
       setInvoices(res.content);
     }
   };
@@ -37,9 +37,10 @@ const Invoices = () => {
         }, 
     });
     if(resp.ok){
-        const res = await resp.json
-        setInvoice(res.content)
+        const res = await resp.json()
+        setInvoices(res.content)
     }} catch (error){
+        console.log(error);
         notifyError("Errore nel reperimento dei dati")
     }
   }
@@ -55,6 +56,7 @@ const Invoices = () => {
 
   useEffect(() => {
     getallInvoices()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
 
