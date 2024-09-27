@@ -6,15 +6,15 @@ const EditProfilePage = () => {
     name: "",
     surname: "",
     email: "",
-    password:"",
     avatar: "",
   });
+
   const [newAvatar, setNewAvatar] = useState(null);
   const url = import.meta.env.VITE_URL;
 
   const fetchUser = async () => {
     try {
-      const resp = await fetch(url + "/users", {
+      const resp = await fetch(url + "/users/me", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
@@ -22,7 +22,7 @@ const EditProfilePage = () => {
 
       if (resp.ok) {
         const result = await resp.json();
-        setUser(result.content);
+        setUser(result);
       } else {
         throw new Error("Errore nel recupero dei dati!");
       }
@@ -33,14 +33,13 @@ const EditProfilePage = () => {
 
   useEffect(() => {
     fetchUser();
+    console.log(user.name);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setUser((prevUser) => ({
-      ...prevUser,
-      [name]: value,
-    }));
+    e.preventDefault();
+    setUser({ ...user, [e.target.name]: e.target.value });
   };
 
   const handleFileChange = (e) => {
@@ -54,7 +53,6 @@ const EditProfilePage = () => {
       formData.append("name", user.name);
       formData.append("surname", user.surname);
       formData.append("email", user.email);
-      formData.append("password", user.password);
       if (newAvatar) {
         formData.append("avatar", newAvatar);
       }
@@ -87,54 +85,23 @@ const EditProfilePage = () => {
             <Form onSubmit={handleSubmit}>
               <Form.Group className="mb-3" controlId="formName">
                 <Form.Label>Nome</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="name"
-                  value={user.name}
-                  onChange={handleInputChange}
-                />
+                <Form.Control type="text" name="name" value={user.name} onChange={handleInputChange} />
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formSurname">
                 <Form.Label>Cognome</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="surname"
-                  value={user.surname}
-                  onChange={handleInputChange}
-                />
+                <Form.Control type="text" name="surname" value={user.surname} onChange={handleInputChange} />
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formEmail">
                 <Form.Label>Email</Form.Label>
-                <Form.Control
-                  type="email"
-                  name="email"
-                  value={user.email}
-                  onChange={handleInputChange}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formSurname">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="password"
-                  value={user.password}
-                  onChange={handleInputChange}
-                />
+                <Form.Control type="email" name="email" value={user.email} onChange={handleInputChange} />
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formAvatar">
                 <Form.Label>Avatar</Form.Label>
                 <Form.Control type="file" onChange={handleFileChange} />
-                {user.avatar && (
-                  <img
-                    src={user.avatar}
-                    alt="avatar"
-                    className="mt-3 rounded-circle"
-                    style={{ width: "100px", height: "100px", objectFit: "cover" }}
-                  />
-                )}
+                {user.avatar && <img src={user.avatar} alt="avatar" className="mt-3 rounded-circle" style={{ width: "100px", height: "100px", objectFit: "cover" }} />}
               </Form.Group>
 
               <Button variant="primary" type="submit" className="w-100">
