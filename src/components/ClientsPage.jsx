@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
+import SideNavbar from "./SideNavBar";
 
 const ClientsPage = () => {
   const [clients, setClients] = useState([]);
@@ -32,6 +33,8 @@ const ClientsPage = () => {
   }, []);
 
   return (
+    <>
+    {/* <SideNavbar/> */}
     <Container className="mt-5">
       <h1>Clients</h1>
       <Table striped bordered hover>
@@ -73,6 +76,7 @@ const ClientsPage = () => {
         </tbody>
       </Table>
     </Container>
+    </>
   );
 };
 
